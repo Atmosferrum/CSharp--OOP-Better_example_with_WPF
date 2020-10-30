@@ -45,6 +45,9 @@ namespace OOP_Organization
             this.xElements = new List<XElement>();
             //employees.CollectionChanged += EmployeesChanged;
             //departments.CollectionChanged += DepartmentsChanged;
+
+            Company company = new Company("Skyrim");
+
             Create();
             Save();
         }
@@ -56,6 +59,7 @@ namespace OOP_Organization
         void Create()
         {
             AddDepartment(new Organization("Organization", DateTime.Now, ""));
+
             AddDepartment(new Bureau("Management", DateTime.Now, "Organization"));
             AddDepartment(new Bureau("Strategy", DateTime.Now, "Organization"));
             AddDepartment(new Division("Marketing", DateTime.Now, "Management"));

@@ -11,9 +11,7 @@ namespace OOP_Organization
         #region Constructor;
 
         public Department(string Name,
-                          DateTime DateOfCreation,
-                          //int NumberOfEmployees,
-                          //int NumberOfDepartments,
+                          DateTime DateOfCreation,                          
                           string ParentDepartment)
         {
             this.name = Name;
@@ -21,6 +19,7 @@ namespace OOP_Organization
             this.numberOfEmployees = 0;
             this.numberOfDepartments = 0;
             this.parentDepartment = ParentDepartment;
+            employees = new List<Employee>();
         }
 
         #endregion Constructor
@@ -32,6 +31,7 @@ namespace OOP_Organization
         public int numberOfEmployees { get; set; }
         public int numberOfDepartments { get; set; }
         protected string parentDepartment { get; set; }
+        static List<Employee> employees;
 
         #endregion Fields
 

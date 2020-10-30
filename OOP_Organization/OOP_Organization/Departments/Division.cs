@@ -10,13 +10,9 @@ namespace OOP_Organization
     {
         public Division(string Name,
                         DateTime DateOfCreation,
-                        //int NumberOfEmployees,
-                        //int NumberOfDepartments, 
                         string ParentDepartment)
             : base(Name,
                   DateOfCreation,
-                  //NumberOfEmployees, 
-                  //NumberOfDepartments, 
                   ParentDepartment)
         { }
     }

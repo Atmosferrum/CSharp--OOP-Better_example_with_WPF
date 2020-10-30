@@ -9,14 +9,10 @@ namespace OOP_Organization
     class Bureau : Department
     {
         public Bureau(string Name, 
-                      DateTime DateOfCreation, 
-                      //int NumberOfEmployees, 
-                      //int NumberOfDepartments, 
+                      DateTime DateOfCreation,                      
                       string ParentDepartment)
             : base(Name, 
-                  DateOfCreation, 
-                  //NumberOfEmployees, 
-                  //NumberOfDepartments,
+                  DateOfCreation,
                   ParentDepartment)
         { }
     }
