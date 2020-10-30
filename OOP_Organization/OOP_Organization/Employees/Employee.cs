@@ -22,7 +22,7 @@ namespace OOP_Organization
 
         #region Constuctor;
 
-        public Employee(int Number, string Name, string LastName, int Age,string Department, int Salary, int DaysWorked)
+        public Employee(int Number, string Name, string LastName, int Age, string Department, int Salary, int DaysWorked)
         {
             this.number = Number;
             this.name = Name;
@@ -31,6 +31,24 @@ namespace OOP_Organization
             this.department = Department;
             this.salary = Salary;
             this.daysWorked = DaysWorked;
+
+            AddMeToDepartment();
+        }
+
+        private void AddMeToDepartment()
+        {
+            if (department == Repository.company.Name)
+            {
+                Company.employees.Add(this);
+                ++Repository.company.NumberOfEmployees;
+            }
+            else
+            {
+                Department father = Repository.departments.Find(item => item.Name == department);
+                father.employees.Add(this);
+                ++father.numberOfEmployees;
+                ++Repository.company.NumberOfEmployees;
+            }   
         }
 
         #endregion Constuctor        

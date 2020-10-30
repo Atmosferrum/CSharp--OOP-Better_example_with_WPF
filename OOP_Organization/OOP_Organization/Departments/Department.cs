@@ -10,17 +10,37 @@ namespace OOP_Organization
     {
         #region Constructor;
 
-        public Department(string Name,
-                          DateTime DateOfCreation,                          
+        public Department(string Name,                       
                           string ParentDepartment)
         {
             this.name = Name;
-            this.dateOfCreation = DateOfCreation;
+            this.dateOfCreation = DateTime.Now;
             this.numberOfEmployees = 0;
             this.numberOfDepartments = 0;
             this.parentDepartment = ParentDepartment;
             employees = new List<Employee>();
+            departments = new List<Department>();
+
+            AddMeToCompany();
         }
+
+        private void AddMeToCompany()
+        {
+            if(parentDepartment == Repository.company.Name)
+            {
+                Company.departments.Add(this);
+                ++Repository.company.NumberOfDepartments;
+            }
+            else
+            {
+                Department father = Repository.departments.Find(item => item.Name == parentDepartment);
+                father.departments.Add(this);
+                ++father.numberOfDepartments;
+                ++Repository.company.NumberOfDepartments;
+            }
+        }
+
+
 
         #endregion Constructor
 
@@ -29,9 +49,10 @@ namespace OOP_Organization
         protected string name { get; set; }
         protected DateTime dateOfCreation { get; set; }
         public int numberOfEmployees { get; set; }
-        public int numberOfDepartments { get; set; }
+        protected int numberOfDepartments { get; set; }
         protected string parentDepartment { get; set; }
-        static List<Employee> employees;
+        protected List<Department> departments;
+        public List<Employee> employees;
 
         #endregion Fields
 
@@ -47,7 +68,6 @@ namespace OOP_Organization
         public DateTime DateOfCreation
         {
             get { return this.dateOfCreation; }
-            set { this.dateOfCreation = value; }
         }
 
         public int NumberOfEmployees

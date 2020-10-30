@@ -9,18 +9,18 @@ namespace OOP_Organization
     struct Company
     {
 
-        #region Variables;
-
-        static List<Department> departments;
-
-        #endregion Variables
-
-
         #region Fields;
+
+        public static List<Department> departments;
+        public static List<Employee> employees;
 
         private string name;
         
         private int numberOfDepartments;
+
+        private int numberOfEmployees;
+
+        private string dateOfCreation;
 
         #endregion Fields
 
@@ -30,7 +30,10 @@ namespace OOP_Organization
         {
             this.name = Name;
             departments = new List<Department>();
+            employees = new List<Employee>();
             numberOfDepartments = 0;
+            numberOfEmployees = 0;
+            dateOfCreation = DateTime.Now.ToShortDateString();
         }
 
         #endregion Constructor
@@ -44,7 +47,14 @@ namespace OOP_Organization
         }
 
         public int NumberOfDepartments
-        {            
+        {
+            get { return this.numberOfDepartments; }
+            set { this.numberOfDepartments = value; }
+        }
+
+        public int NumberOfEmployees
+        {
+            get { return this.numberOfEmployees; }
             set { this.numberOfDepartments = value; }
         }
 

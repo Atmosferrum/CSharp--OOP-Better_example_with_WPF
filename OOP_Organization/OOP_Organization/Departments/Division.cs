@@ -9,10 +9,8 @@ namespace OOP_Organization
     class Division : Department
     {
         public Division(string Name,
-                        DateTime DateOfCreation,
                         string ParentDepartment)
             : base(Name,
-                  DateOfCreation,
                   ParentDepartment)
         { }
     }
