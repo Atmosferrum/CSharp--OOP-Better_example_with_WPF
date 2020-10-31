@@ -64,7 +64,9 @@
     <Compile Include="Employees\HeadOfDepartment.cs" />
     <Compile Include="Employees\HeadOfOrganization.cs" />
     <Compile Include="Employees\Intern.cs" />
+    <Compile Include="Employees\ISalary.cs" />
     <Compile Include="Employees\Worker.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Repository.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

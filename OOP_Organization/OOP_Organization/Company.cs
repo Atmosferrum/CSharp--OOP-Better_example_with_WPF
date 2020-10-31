@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace OOP_Organization
 {
-    struct Company
+    class Company
     {
 
         #region Fields;
 
-        public static List<Department> departments;
-        public static List<Employee> employees;
+        public List<Department> departments;
+        public List<Employee> employees;
 
         private string name;
-        
-        private int numberOfDepartments;
 
-        private int numberOfEmployees;
+        public int numberOfDepartments;
+
+        public int numberOfEmployees;
 
         private string dateOfCreation;
 
@@ -30,10 +30,10 @@ namespace OOP_Organization
         {
             this.name = Name;
             departments = new List<Department>();
-            employees = new List<Employee>();
+            employees = new List<Employee>();            
+            dateOfCreation = DateTime.Now.ToShortDateString();
             numberOfDepartments = 0;
             numberOfEmployees = 0;
-            dateOfCreation = DateTime.Now.ToShortDateString();
         }
 
         #endregion Constructor
@@ -55,12 +55,9 @@ namespace OOP_Organization
         public int NumberOfEmployees
         {
             get { return this.numberOfEmployees; }
-            set { this.numberOfDepartments = value; }
+            set { this.numberOfEmployees = value; }
         }
 
-
-
         #endregion Properties
-
     }
 }

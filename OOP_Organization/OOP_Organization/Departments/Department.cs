@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,32 +12,34 @@ namespace OOP_Organization
         #region Constructor;
 
         public Department(string Name,                       
-                          string ParentDepartment)
+                          string ParentDepartment,
+                          Repository Repository)
         {
             this.name = Name;
             this.dateOfCreation = DateTime.Now;
-            this.numberOfEmployees = 0;
-            this.numberOfDepartments = 0;
+            this.NumberOfEmployees = 0;
+            this.NumberOfDepartments = 0;
             this.parentDepartment = ParentDepartment;
             employees = new List<Employee>();
             departments = new List<Department>();
+            this.repository = Repository;
 
             AddMeToCompany();
         }
 
         private void AddMeToCompany()
         {
-            if(parentDepartment == Repository.company.Name)
+            if (parentDepartment == repository.company.Name)
             {
-                Company.departments.Add(this);
-                ++Repository.company.NumberOfDepartments;
+                repository.company.departments.Add(this);
+                ++repository.company.NumberOfDepartments;
             }
             else
             {
-                Department father = Repository.departments.Find(item => item.Name == parentDepartment);
+                Department father = repository.departments.Find(item => item.Name == parentDepartment);
                 father.departments.Add(this);
-                ++father.numberOfDepartments;
-                ++Repository.company.NumberOfDepartments;
+                ++father.NumberOfDepartments;
+                ++repository.company.NumberOfDepartments;
             }
         }
 
@@ -53,6 +56,7 @@ namespace OOP_Organization
         protected string parentDepartment { get; set; }
         protected List<Department> departments;
         public List<Employee> employees;
+        protected Repository repository;
 
         #endregion Fields
 
@@ -72,14 +76,14 @@ namespace OOP_Organization
 
         public int NumberOfEmployees
         {
-            get { return this.numberOfEmployees; }
-            set { this.numberOfEmployees = value; }
+            get { return this.numberOfDepartments; }
+            set { this.numberOfDepartments = value; }
         }
 
         public int NumberOfDepartments
         {
-            get { return this.numberOfDepartments; }
-            set { this.numberOfDepartments = value; }
+            get { return this.numberOfEmployees; }
+            set { this.numberOfEmployees = value; }
         }
 
         public string ParentDepartment
@@ -96,29 +100,8 @@ namespace OOP_Organization
         string print()
         {
             return $"{this.name,15}" +
-                   $"{this.dateOfCreation,15}" +
-                   $"{this.numberOfEmployees}";
+                   $"{this.dateOfCreation,15}";
         }
-
-        //public virtual int CountEmployees()
-        //{
-        //    int count = 0;
-
-        //    foreach (Employee emply in Repository.employees)
-        //        if (emply.Department == Name)
-        //            ++count;
-        //    return count;
-        //}
-
-        //public virtual int CountDepartments()
-        //{
-        //    int count = 0;
-
-        //    foreach (Department dept in Repository.departments)
-        //        if (dept.ParentDepartment == Name)
-        //            ++count;
-        //    return count;
-        //}
 
         #endregion Methods
     }

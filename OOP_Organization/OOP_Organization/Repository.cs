@@ -7,6 +7,7 @@ using System.IO;
 using System.Xml.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Diagnostics;
 //using System.Collections.ObjectModel;
 //using System.Collections.Specialized;
 
@@ -16,9 +17,9 @@ namespace OOP_Organization
     {
         #region Fields;
 
-        static public List<Employee> employees; //Employees DATA array
+        public List<Employee> employees; //Employees DATA array
 
-        static public List<Department> departments; //Departments DATA array
+        public List<Department> departments; //Departments DATA array
 
         List<XElement> xElements; //XML Data
 
@@ -28,7 +29,9 @@ namespace OOP_Organization
 
         public int departmentIndex; //Current INDEX for department to add
 
-        public static Company company;
+        public Company company;
+
+        const string companyName = "Normandy";
 
         #endregion Fields
 
@@ -46,7 +49,7 @@ namespace OOP_Organization
             departments = new List<Department>();
             this.xElements = new List<XElement>();
 
-            company = new Company("Skyrim");
+            company = new Company(companyName);
 
             Create();
             Save();
@@ -60,24 +63,25 @@ namespace OOP_Organization
         {
             //AddDepartment(new Organization("Organization", DateTime.Now, ""));
 
-            AddDepartment(new Bureau("Management", "Skyrim"));
-            AddDepartment(new Bureau("Strategy", "Skyrim"));
-            AddDepartment(new Division("Marketing", "Management"));
-            AddDepartment(new Division("PR", "Management"));
-            AddDepartment(new Division("Production", "Strategy"));
-            AddDepartment(new Division("HR", "Strategy"));
+            AddDepartment(new Bureau("Management", companyName, this));            
+            AddDepartment(new Bureau("Strategy", companyName, this));
+            AddDepartment(new Division("Marketing", "Management", this));
+            AddDepartment(new Division("PR", "Management", this));
+            AddDepartment(new Division("Production", "Strategy", this));
+            AddDepartment(new Division("HR", "Strategy", this));
 
-            AddEmloyee(new HeadOfOrganization(0, "G", "Man", 99, company.Name, 0, 1));
+            AddEmloyee(new HeadOfOrganization(0, "Commander", "Shepard", 99, company.Name, 365 * 2, this));
 
             foreach (Department dept in departments)
             {
-                AddEmloyee(new HeadOfDepartment(0, "Ulfric", "Stormcloak", 45, dept.Name, 0, 365));
-                AddEmloyee(new Worker(1, "Sam", "Fisher", 33, dept.Name, 0, 155));
-                AddEmloyee(new Worker(1, "Sam", "Fisher", 33, dept.Name, 0, 155));
-                AddEmloyee(new Intern(1, "Illusive", "Man", 33, dept.Name, 0, 155));
-                AddEmloyee(new Intern(1, "Illusive", "Man", 33, dept.Name, 0, 155));
-                AddEmloyee(new Intern(1, "Illusive", "Man", 33, dept.Name, 0, 155));
-                AddEmloyee(new Intern(1, "Illusive", "Man", 33, dept.Name, 0, 155));
+                AddEmloyee(new HeadOfDepartment(0, "Liara", "T'Soni", 45, dept.Name,  365, this));
+                AddEmloyee(new Worker(1, "Tali", "Zorah", 33, dept.Name, 365, this));
+                AddEmloyee(new Worker(1, "Miranda", "Lawson", 41, dept.Name,  185, this));
+                AddEmloyee(new Worker(1, "Garrus", "Vakarian", 57, dept.Name, 65, this));
+                AddEmloyee(new Intern(1, "Zaeed", "Massani", 23, dept.Name, 365, this));
+                AddEmloyee(new Intern(1, "Urdnot", "Wrex", 24, dept.Name, 185, this));
+                AddEmloyee(new Intern(1, "Mordin", "Solus", 25, dept.Name, 65, this));
+                AddEmloyee(new Intern(1, "Thane", "Krios", 27, dept.Name, 30, this));
             }
         }
 
@@ -129,7 +133,7 @@ namespace OOP_Organization
         void OrganizeToSave()
         {
             XElement father;
-            father = xElements.Find(item => (string)item.Attribute("name") == "Skyrim");
+            father = xElements.Find(item => (string)item.Attribute("name") == companyName);
 
             foreach (XElement x in xElements)
             {
@@ -145,7 +149,7 @@ namespace OOP_Organization
                         management = xElements.Find(item => (string)item.Attribute("name") == "Management");
                         management.Add(x);
                         break;
-                    case "Organization":
+                    case companyName:
                         father.Add(x);
                         break;
                     default:
@@ -170,14 +174,13 @@ namespace OOP_Organization
                     XAttribute employeeAge = new XAttribute("age", emply.Age);
                     XAttribute employeeDepartment = new XAttribute("department", emply.Department);
                     XAttribute employeeSalary = new XAttribute("salary", emply.Salary);
-                    XAttribute employeeNumberOfProjects = new XAttribute("numberOfProjects", emply.DaysWorked);
+                    XAttribute employeeNumberOfProjects = new XAttribute("daysWorked", emply.DaysWorked);
 
                     myEmployee.Add(employeeNumber, employeeName, employeeLastName, employeeAge, employeeDepartment, employeeSalary, employeeNumberOfProjects);
                     dept.Add(myEmployee);
                 }
             }
         }
-
 
         void AddEmloyee(Employee newEmployee)
         {

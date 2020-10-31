@@ -10,46 +10,39 @@ namespace OOP_Organization
     {
         #region Fields;
 
-        private int number;
-        private string name;
-        private string lastName;
-        private int age;
-        private string department;
-        private int salary;
-        private int daysWorked;
+        protected int number;
+        protected string name;
+        protected string lastName;
+        protected int age;
+        protected string department;
+        private float salary;
+        protected int daysWorked;
+        protected Repository repository;
 
         #endregion Fields
 
         #region Constuctor;
 
-        public Employee(int Number, string Name, string LastName, int Age, string Department, int Salary, int DaysWorked)
+        public Employee(int Number, 
+                        string Name, 
+                        string LastName, 
+                        int Age, 
+                        string Department, 
+                        int DaysWorked,
+                        Repository Repository)
         {
             this.number = Number;
             this.name = Name;
             this.lastName = LastName;
             this.age = Age;
             this.department = Department;
-            this.salary = Salary;
             this.daysWorked = DaysWorked;
+            this.repository = Repository;
 
             AddMeToDepartment();
         }
 
-        private void AddMeToDepartment()
-        {
-            if (department == Repository.company.Name)
-            {
-                Company.employees.Add(this);
-                ++Repository.company.NumberOfEmployees;
-            }
-            else
-            {
-                Department father = Repository.departments.Find(item => item.Name == department);
-                father.employees.Add(this);
-                ++father.numberOfEmployees;
-                ++Repository.company.NumberOfEmployees;
-            }   
-        }
+        
 
         #endregion Constuctor        
 
@@ -85,7 +78,7 @@ namespace OOP_Organization
             set { this.department = value; }
         }
 
-        public virtual int Salary
+        public float Salary
         {
             get { return this.salary; }
             set { this.salary = value; }
@@ -100,6 +93,22 @@ namespace OOP_Organization
         #endregion Properties
 
         #region Methods;
+        
+        private void AddMeToDepartment()
+        {
+            if (department == repository.company.Name)
+            {
+                repository.company.employees.Add(this);
+                ++repository.company.NumberOfEmployees;
+            }
+            else
+            {
+                Department father = repository.departments.Find(item => item.Name == department);
+                father.employees.Add(this);
+                ++father.NumberOfEmployees;
+                ++repository.company.NumberOfEmployees;
+            }
+        }
 
         public string print()
         {

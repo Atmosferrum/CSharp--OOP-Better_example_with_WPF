@@ -24,9 +24,7 @@ namespace OOP_Organization
         {
             InitializeComponent();
 
-            string path = "1.xml";
-
-            Repository repository = new Repository(path);
+            Program program = new Program();
         }
     }
 }

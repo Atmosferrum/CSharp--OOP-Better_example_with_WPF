@@ -9,9 +9,11 @@ namespace OOP_Organization
     class Bureau : Department
     {
         public Bureau(string Name,                    
-                      string ParentDepartment)
+                      string ParentDepartment,
+                      Repository Repository)
             : base(Name, 
-                  ParentDepartment)
+                  ParentDepartment,
+                  Repository)
         { }
     }
 }

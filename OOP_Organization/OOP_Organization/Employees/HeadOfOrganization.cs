@@ -8,9 +8,22 @@ namespace OOP_Organization
 {
     class HeadOfOrganization : Employee
     {
-        public HeadOfOrganization(int Number, string Name, string LastName, int Age, string Department, int Salary, int NumberOfProjects) 
-            : base(Number, Name, LastName, Age, Department, Salary, NumberOfProjects){}
+        public HeadOfOrganization(int Number, 
+                                  string Name, 
+                                  string LastName, 
+                                  int Age, 
+                                  string Department,  
+                                  int DaysWorked,
+                                  Repository Repository) 
+            : base(Number, 
+                   Name, 
+                   LastName, 
+                   Age, 
+                   Department,
+                   DaysWorked,
+                   Repository)
+        {}
 
-        public override int Salary { get => base.Salary; set => base.Salary = value; }
+        
     }
 }
